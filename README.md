@@ -211,81 +211,13 @@ For step-by-step hardware setup, see the [Quick Start Guide](docs/guides/endpoin
 
 ---
 
-## 🔧 Building from Source
-
-### Prerequisites
-
-- **Visual Studio 2022** (17.8+) with:
-  - .NET 10 SDK
-  - Windows App SDK
-  - C++ build tools (for native dependencies)
-- **Git**
-- **(Optional)** NVIDIA CUDA Toolkit 13+ for GPU acceleration
-- **(Optional)** PlatformIO for ESP32 firmware
-
-### Build the Windows Application
-
-```bash
-git clone https://github.com/BootBlock/SpectraWrite.git
-cd SpectraWrite
-dotnet restore
-dotnet build -c Release
-```
-
-The application builds to `!Distribution/` with a flat structure.
-
-### Build the ESP32 Firmware
-
-```bash
-cd tools/esp32-spectrawrite
-
-# Choose your board
-pio run -e esp32s3-devkitc -t upload    # DevKitC-1
-pio run -e esp32s3-zero -t upload       # ESP32-S3-Zero
-pio run -e xiao-esp32s3 -t upload       # XIAO ESP32S3
-```
-
-For detailed build instructions, see the [ESP32 Firmware Guide](docs/guides/endpoint/esp32-firmware.md).
-
----
-
-## 🗂️ Project Structure
-
-```
-SpectraWrite/
-├── src/                          # Windows application source
-│   ├── SpectraWrite.UI/          # WinUI 3 application
-│   ├── SpectraWrite.Audio/       # Audio capture (NAudio)
-│   ├── SpectraWrite.Transcription/ # Whisper.net backend
-│   ├── SpectraWrite.Core/        # Core abstractions
-│   └── ...                       # Other libraries
-├── modules/                      # Plugin modules
-│   ├── Module.EndPoint/          # Remote endpoint support
-│   ├── Module.Overlay/           # Floating overlay
-│   ├── Module.Dashboard/         # Statistics dashboard
-│   └── ...                       # Other modules
-├── tools/
-│   └── esp32-spectrawrite/       # ESP32 SpectraType firmware
-├── docs/
-│   └── guides/endpoint/          # Hardware setup documentation
-└── tests/                        # Unit and UI tests
-```
-
----
-
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our contributing guidelines and submit pull requests to the `main` branch.
+Contributions are welcome in the form of Modules!
 
 ### Module Development
 
 SpectraWrite's modular architecture makes it easy to extend. See the [Module Development Guide](docs/MODULE-DEV-GUIDE.md) to create your own plugins.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
 ---
 
