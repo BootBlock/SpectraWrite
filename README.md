@@ -1,3 +1,5 @@
+_Note: Links to other sections of the documentation will be completed soon - 404s, for now!_
+
 # SpectraWrite
 
 **AI-Powered Voice Dictation for Windows — Local, Private, Extensible**
