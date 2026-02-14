@@ -1,5 +1,7 @@
 _Note: Links to other sections of the documentation will be completed soon - 404s, for now!_
 
+> _Another Note: When the first test version is released, be aware that settings backwards compatibility will not be a priority; if it means improving the backend system in some way results in requiring users to redo their settings, then so be it._
+
 # SpectraWrite
 
 **AI-Powered Voice Dictation for Windows — Local, Private, Extensible**
