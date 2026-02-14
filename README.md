@@ -1,6 +1,6 @@
 _Note: Links to other sections of the documentation will be completed soon - 404s, for now!_
 
-> Note: For the initial test release, backwards compatibility for settings is not a priority. We are focusing on backend optimisation, which may require you to reset or reconfigure settings in future updates.
+> Note: For the initial test release, backwards compatibility for settings is not a priority. I'm focusing on backend optimisation, which may require you to reset or reconfigure settings in future updates.
 
 # SpectraWrite
 
