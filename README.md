@@ -119,7 +119,7 @@ The target machine sees only a standard USB keyboard — completely undetectable
 | **Alternatives** | Waveshare ESP32-S3-Zero, Seeed XIAO ESP32S3 |
 | **USB** | Native USB OTG (HID capable) |
 | **Connectivity** | WiFi 802.11 b/g/n, Bluetooth 5.0 |
-| **Cost** | ~$10 USD |
+| **Cost** | ~£5 / $10 USD |
 
 > **Important**: Original ESP32 boards (non-S2/S3) do **not** have native USB support and cannot function as USB HID keyboards.
 
