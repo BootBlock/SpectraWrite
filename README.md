@@ -72,7 +72,9 @@ The target machine sees only a standard USB keyboard — completely undetectable
 - **System tray** — minimise to tray with quick access context menu
 - **Sound events** — configurable auditory feedback for recording, transcription, errors, and more
 - **Settings search** — find any setting instantly with live search and control highlighting
-- **Smooth animations** — spring-based UI animations (disablable for accessibility)
+- **Smooth animations** — spring-based UI animations (disableable for accessibility)
+
+<img width="586" height="843" alt="image" src="https://github.com/user-attachments/assets/7b7c147e-6fb5-46e7-9fd4-12f791ed3924" />
 
 ### Analytics & Diagnostics
 - **Dashboard** — local usage statistics with transcription patterns, word counts, and session history
