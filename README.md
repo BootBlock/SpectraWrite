@@ -46,8 +46,7 @@ The target machine sees only a standard USB keyboard — completely undetectable
 - **Push-to-Talk** with configurable global hotkeys
 - **Voice Activity Detection (VAD)** — Silero neural VAD for hands-free and always-listening modes
 - **Audio processing pipeline** — compression, noise gate, de-esser, high-pass filter, normalisation
-- **Remote Microphone** — wireless audio input from ESP32 and Android devices over WiFi
-- **Multi-language support** with auto-detection
+- **Remote Microphone** — wireless audio input from ESP32, Android/Windows/Mac/Linux devices over WiFi
 
 ### Text Processing
 - **Voice Replacements** — spoken trigger phrases mapped to text (e.g., "new line" → line break, "question mark" → ?)
