@@ -216,8 +216,8 @@ SpectraWrite ships with 26+ built-in modules. All modules are optional and can b
 
 | Module | Description |
 |--------|-------------|
-| **Remote EndPoint** | Send transcriptions to ESP32/Raspberry Pi devices via WiFi or Bluetooth |
-| **Remote Microphone** | Wireless audio input from ESP32 and Android devices |
+| **Remote EndPoint** | Send transcriptions to ESP32/Raspberry Pi devices via WiFi or Bluetooth; supports displays |
+| **Remote Microphone** | Wireless audio input from ESP32 and Android devices; supports displays |
 
 ---
 
