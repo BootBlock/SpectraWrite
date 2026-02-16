@@ -19,7 +19,7 @@ SpectraWrite is a **local-first, privacy-focused voice dictation system** for Wi
 
 ### Why Hardware Text Entry?
 
-SpectraWrite includes an optional **hardware companion device** (ESP32-S3) called **SpectraType** that receives transcribed text and emulates a standard USB keyboard. This architecture provides unique advantages:
+SpectraWrite includes an optional **hardware companion device** (ESP32-S3) called **SpectraWrite Remote Mic** that receives transcribed text and emulates a standard USB keyboard. This architecture provides unique advantages:
 
 | Challenge | SpectraWrite + SpectraType Solution |
 |-----------|-------------------------------------|
