@@ -1,10 +1,6 @@
-_Note: Links to other sections of the documentation will be completed soon - 404s, for now!_
-
-> Note: For the initial test release, backwards compatibility for settings is not a priority. I'm focusing on backend optimisation, which may require you to reset or reconfigure settings in future updates.
-
 # SpectraWrite
 
-**AI-Powered Voice Dictation for Windows — Local, Private, Extensible**
+**AI-Powered Voice Dictation for Windows — Offline-First, Privacy-Aware, Extensible**
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-0078D4?logo=windows)](https://www.microsoft.com/windows)
@@ -15,11 +11,11 @@ _Note: Links to other sections of the documentation will be completed soon - 404
 
 ## What is SpectraWrite?
 
-SpectraWrite is a **local-first, privacy-focused voice dictation system** for Windows that transcribes your speech in real-time using state-of-the-art AI. Unlike cloud-based alternatives, your voice data never leaves your machine. It features a modular plugin architecture with 26+ built-in modules covering everything from AI text refinement to hardware integration.
+SpectraWrite is an **offline-first, privacy-aware voice dictation system** for Windows that transcribes speech in real time using modern local AI models. By default, speech recognition runs on your device and no audio is sent to cloud services. Optional modules can download models, talk to local-network devices, or send text to configured AI providers when you explicitly enable those features. It features a modular plugin architecture with 26+ built-in modules covering everything from AI text refinement to hardware integration.
 
 ### Why Hardware Text Entry?
 
-SpectraWrite includes an optional **hardware companion device** (ESP32-S3) called **SpectraWrite Remote Mic** that receives transcribed text and emulates a standard USB keyboard. This architecture provides unique advantages:
+SpectraWrite includes an optional **hardware companion device** (ESP32-S3) called **SpectraType** that receives transcribed text and emulates a standard USB keyboard. This architecture provides unique advantages:
 
 | Challenge | SpectraWrite + SpectraType Solution |
 |-----------|-------------------------------------|
@@ -30,6 +26,18 @@ SpectraWrite includes an optional **hardware companion device** (ESP32-S3) calle
 | **Legacy/embedded systems** | Voice-enable any device that accepts USB keyboards |
 
 The target machine sees only a standard USB keyboard — completely undetectable and universally compatible.
+
+---
+
+## In Action
+
+The main dictation workspace keeps the critical controls close at hand: model readiness, live audio metering, push-to-talk, and the current transcription surface are all visible in one view.
+
+![SpectraWrite main dictation workspace showing live audio metering and a local Large V3 model ready to transcribe](docs/images/readme-main-dictation.png)
+
+Pad gives longer-form dictation a dedicated workspace, so you can capture notes, drafts, and edits in tabs instead of sending every utterance straight into another application.
+
+![SpectraWrite Pad showing a tabbed note with sample dictated content](docs/images/readme-pad.png)
 
 ---
 
@@ -46,7 +54,8 @@ The target machine sees only a standard USB keyboard — completely undetectable
 - **Push-to-Talk** with configurable global hotkeys
 - **Voice Activity Detection (VAD)** — Silero neural VAD for hands-free and always-listening modes
 - **Audio processing pipeline** — compression, noise gate, de-esser, high-pass filter, normalisation
-- **Remote Microphone** — wireless audio input from ESP32, Android/Windows/Mac/Linux devices over WiFi
+- **Remote Microphone** — wireless audio input from ESP32 and Android devices over WiFi
+- **Multi-language support** with auto-detection
 
 ### Text Processing
 - **Voice Replacements** — spoken trigger phrases mapped to text (e.g., "new line" → line break, "question mark" → ?)
@@ -72,9 +81,7 @@ The target machine sees only a standard USB keyboard — completely undetectable
 - **System tray** — minimise to tray with quick access context menu
 - **Sound events** — configurable auditory feedback for recording, transcription, errors, and more
 - **Settings search** — find any setting instantly with live search and control highlighting
-- **Smooth animations** — spring-based UI animations (disableable for accessibility)
-
-<img width="586" height="843" alt="image" src="https://github.com/user-attachments/assets/7b7c147e-6fb5-46e7-9fd4-12f791ed3924" />
+- **Smooth animations** — spring-based UI animations (disablable for accessibility)
 
 ### Analytics & Diagnostics
 - **Dashboard** — local usage statistics with transcription patterns, word counts, and session history
@@ -82,9 +89,11 @@ The target machine sees only a standard USB keyboard — completely undetectable
 - **Error reporting** — friendly error handler with optional (never automatic) diagnostic report submission
 
 ### Privacy & Security
-- **Fully offline** — no cloud, no internet required, no telemetry
+- **Offline by default** — core dictation works without cloud services
+- **Optional network features** — model downloads, local-network integrations, and cloud AI providers are opt-in
+- **No automatic telemetry** — diagnostic submission is user-initiated only
 - **HMAC-SHA256 authentication** for hardware communication
-- **End-to-end security** with configurable passkeys
+- **Configurable passkeys** for remote device trust
 
 ### Hardware Integration (SpectraType)
 - **WiFi & Bluetooth connectivity** — station mode, AP mode, or BLE
@@ -119,7 +128,7 @@ The target machine sees only a standard USB keyboard — completely undetectable
 | **Alternatives** | Waveshare ESP32-S3-Zero, Seeed XIAO ESP32S3 |
 | **USB** | Native USB OTG (HID capable) |
 | **Connectivity** | WiFi 802.11 b/g/n, Bluetooth 5.0 |
-| **Cost** | ~£5 / $10 USD |
+| **Cost** | ~$10 USD |
 
 > **Important**: Original ESP32 boards (non-S2/S3) do **not** have native USB support and cannot function as USB HID keyboards.
 
@@ -130,15 +139,19 @@ The target machine sees only a standard USB keyboard — completely undetectable
 ### 1. Install the Windows Application
 
 1. Download the latest release from the [Releases page](https://github.com/BootBlock/SpectraWrite/releases)
-2. Run the installer or extract the portable ZIP
+2. Run the x64 installer or extract the x64 portable ZIP
 3. Launch **SpectraWrite**
 4. On first run, select and download a transcription model via the Model Manager
+
+> **Trust note**: Release artifacts are currently intentionally unsigned. Windows may show SmartScreen or reputation prompts the first time you run the installer or app.
+
+> **Architecture note**: Public v1 release artifacts are x64-only.
 
 For detailed installation instructions, see the [Installation Guide](docs/guides/endpoint/spectrawrite-setup.md).
 
 ### 2. Start Dictating (Software-Only Mode)
 
-1. Click **Start** or press your Push-to-Talk hotkey (default: `Right Shift`)
+1. Click **Start** or press your Push-to-Talk hotkey (default: `Right Control`)
 2. Speak naturally into your microphone
 3. Watch your words appear in real-time
 4. Release the hotkey to stop dictation
@@ -159,6 +172,47 @@ For step-by-step hardware setup, see the [Quick Start Guide](docs/guides/endpoin
 
 ---
 
+## Network & Scope
+
+### Network Ports (SpectraType Hardware)
+
+| Port | Protocol | Direction | Purpose |
+|------|----------|-----------|---------|
+| **80** | HTTP | PC → Device | Primary communication — typing requests, status, configuration portal |
+| **80** | WebSocket | PC ↔ Device | Real-time event streaming (at `/ws` path) |
+| **443** | HTTPS | PC → Device | Encrypted alternative to port 80 (requires TLS certificates) |
+| **4210** | UDP | PC → Device | Optional low-latency fast path (2–8 ms) |
+| **8989** | HTTP | Device → PC | Remote Microphone audio streaming (separate module) |
+
+Port 80 is the standard HTTP port — no port suffix is needed in the Server URL (e.g., `http://192.168.1.42`).
+
+### Privacy posture
+
+- **Default behavior**: Speech recognition, local typing, and core dictation flows run locally.
+- **Optional internet use**: Model downloads, update checks, and cloud AI providers can use the internet when enabled.
+- **Optional local-network use**: Remote EndPoint and Remote Microphone communicate with devices on your LAN.
+- **Optional Bluetooth use**: Remote EndPoint can use Bluetooth transports when configured.
+
+The application UI mirrors this with **Works Offline**, **Internet**, **Local Network**, **Bluetooth**, and **Analytics** badges in setup and module management surfaces. **Works Offline** means the module's core tasks do not require internet access; optional downloads or LAN/Bluetooth integrations are disclosed separately by the other badges.
+
+### Public v1 scope
+
+Unless marked otherwise, built-in modules are part of the supported public v1 surface.
+
+- **Experimental in public v1**: Voice Commands, Voice Activation
+- **Feature-level experimental items still called out in-product**: Whisper streaming mode and selected advanced visual styles
+
+Experimental modules are included for evaluation, but they are outside the polished v1 support bar and may change more aggressively.
+
+### Trust docs
+
+- [PRIVACY.md](PRIVACY.md) — repo-level privacy and network summary
+- [SECURITY.md](SECURITY.md) — vulnerability reporting and security notes
+- [SUPPORT.md](SUPPORT.md) — support boundaries and troubleshooting paths
+- [CHANGELOG.md](CHANGELOG.md) — release notes and scope notes
+
+---
+
 ## Modules
 
 SpectraWrite ships with 26+ built-in modules. All modules are optional and can be enabled or disabled individually.
@@ -175,7 +229,7 @@ SpectraWrite ships with 26+ built-in modules. All modules are optional and can b
 
 | Module | Description |
 |--------|-------------|
-| **AI / LLM** | Ollama integration for AI-powered text refinement and formatting |
+| **AI / LLM** | Multi-provider AI text processing via Ollama, OpenAI-compatible APIs, and Anthropic Claude |
 | **Audio Processing** | Compression, noise gate, de-esser, high-pass filter, normalisation |
 | **Neural VAD** | Silero-based neural voice activity detection for hands-free modes |
 | **Voice Replacements** | Spoken trigger phrases mapped to text substitutions |
@@ -216,8 +270,10 @@ SpectraWrite ships with 26+ built-in modules. All modules are optional and can b
 
 | Module | Description |
 |--------|-------------|
-| **Remote EndPoint** | Send transcriptions to ESP32/Raspberry Pi devices via WiFi or Bluetooth; supports displays |
-| **Remote Microphone** | Wireless audio input from ESP32 and Android devices; supports displays |
+| **Remote EndPoint** | Send transcriptions to ESP32/Raspberry Pi devices via WiFi or Bluetooth |
+| **Remote Microphone** | Wireless audio input from ESP32 and Android devices |
+
+> Modules marked **Experimental** in the app are shipped in the public build, but they are not treated as part of the polished v1 support bar.
 
 ---
 
@@ -276,10 +332,10 @@ SpectraWrite ships with 26+ built-in modules. All modules are optional and can b
 │                           YOUR WORKSTATION                                  │
 │  ┌─────────────────────────────────────────────────────────────────────┐    │
 │  │                      SpectraWrite (Windows)                         │    │
-│  │  ┌───────────┐   ┌──────────────┐   ┌──────────────┐                │    │
+│  │  ┌───────────┐   ┌──────────────┐   ┌──────────────┐               │    │
 │  │  │ Microphone│──▶│ Audio Capture│──▶│  Whisper /   │               │    │
 │  │  │    🎤     │   │   (NAudio)   │   │  Parakeet    │               │    │
-│  │  └───────────┘   └──────────────┘   └──────┬───────┘                │    │
+│  │  └───────────┘   └──────────────┘   └──────┬───────┘               │    │
 │  │                                            │                        │    │
 │  │  ┌───────────┐   ┌──────────────┐          │                        │    │
 │  │  │  Remote   │──▶│ Audio Proc.  │──────────┘                        │    │
@@ -293,10 +349,10 @@ SpectraWrite ships with 26+ built-in modules. All modules are optional and can b
 │  │              ┌────────────────────────────┼────────────────────┐    │    │
 │  │              │                            │                    │    │    │
 │  │              ▼                            ▼                    ▼    │    │
-│  │   ┌──────────────────┐        ┌────────────────┐    ┌─────────────┐ │    │
-│  │   │   Local Typing   │        │  WiFi/HTTP to  │    │  Pad / Quick│ │    │
-│  │   │  (This Machine)  │        │  SpectraType   │    │   Dictate   │ │    │
-│  │   └──────────────────┘        └───────┬────────┘    └─────────────┘ │    │
+│  │   ┌──────────────────┐        ┌────────────────┐    ┌─────────────┐│    │
+│  │   │   Local Typing   │        │  WiFi/HTTP to  │    │  Pad / Quick││    │
+│  │   │  (This Machine)  │        │  SpectraType   │    │   Dictate   ││    │
+│  │   └──────────────────┘        └───────┬────────┘    └─────────────┘│    │
 │  │                                       │                             │    │
 │  └───────────────────────────────────────┼─────────────────────────────┘    │
 │                                          │                                  │
