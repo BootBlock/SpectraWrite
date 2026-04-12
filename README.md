@@ -217,6 +217,10 @@ Experimental modules are included for evaluation, but they are outside the polis
 
 SpectraWrite ships with 26+ built-in modules. All modules are optional and can be enabled or disabled individually.
 
+The Module Manager groups modules by category so you can scan capabilities, dependencies, and enablement state without digging through settings pages.
+
+![SpectraWrite Module Manager showing category navigation, live enabled counts, and module cards with capability badges](docs/images/readme-module-manager.png)
+
 ### Transcription Engines
 
 | Module | Description |
