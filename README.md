@@ -277,6 +277,10 @@ The Module Manager groups modules by category so you can scan capabilities, depe
 | **Remote EndPoint** | Send transcriptions to ESP32/Raspberry Pi devices via WiFi or Bluetooth |
 | **Remote Microphone** | Wireless audio input from ESP32 and Android devices |
 
+The Endpoints tab gives Remote EndPoint a dedicated control surface for adding devices, checking connection state, and watching health status before you route dictation off-machine.
+
+![SpectraWrite Endpoints tab showing configured remote devices, connection controls, and device health monitoring](docs/images/readme-endpoints.png)
+
 > Modules marked **Experimental** in the app are shipped in the public build, but they are not treated as part of the polished v1 support bar.
 
 ---
