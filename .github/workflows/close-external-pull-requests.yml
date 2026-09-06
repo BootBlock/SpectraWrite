@@ -1,0 +1,61 @@
+# Runs on the public SpectraWrite repository.
+#
+# SpectraWrite does not accept external pull requests. That repository carries the issue tracker,
+# the releases and the README, and no source code, so a pull request there has nothing to apply
+# against. This workflow closes any pull request from a non-collaborator and points the author at
+# the issue tracker. CONTRIBUTING.md states the same policy for anyone reading it first.
+
+name: Close External Pull Requests
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+# `pull_request_target` runs against the base repository with a writable token, so this workflow
+# must never check out or execute the pull request's code. It only calls the GitHub API.
+permissions:
+  pull-requests: write
+
+concurrency:
+  group: close-external-pull-requests-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  close-external-pull-request:
+    name: Close a pull request from a non-collaborator
+    runs-on: ubuntu-latest
+
+    # `author_association` is supplied by GitHub on the event payload, so no extra API permission is
+    # needed to read it. OWNER, MEMBER and COLLABORATOR are the three values that mean the author
+    # has been granted access to the repository. Every other value means they have not.
+    if: >-
+      github.event.pull_request.author_association != 'OWNER' &&
+      github.event.pull_request.author_association != 'MEMBER' &&
+      github.event.pull_request.author_association != 'COLLABORATOR'
+
+    steps:
+      - name: Explain the policy and close the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          cat > comment.md <<'COMMENT'
+          Thank you for taking the time to put this together. It is appreciated.
+
+          SpectraWrite does not accept external pull requests, so this one has been closed
+          automatically. Nothing is wrong with your change. This repository holds only the issue
+          tracker, the releases and the README, and the application itself is developed elsewhere,
+          so there is no source code here for a pull request to apply against.
+
+          The best way to get your change made is to
+          [open an issue](https://github.com/BootBlock/SpectraWrite/issues/new) with a short summary
+          of what you need. See
+          [CONTRIBUTING.md](https://github.com/BootBlock/SpectraWrite/blob/main/CONTRIBUTING.md) for
+          what is useful to include.
+          COMMENT
+
+          gh pr comment "$PR_NUMBER" --body-file comment.md
+          gh pr close "$PR_NUMBER"
+          echo "Closed pull request #$PR_NUMBER from @$PR_AUTHOR."
